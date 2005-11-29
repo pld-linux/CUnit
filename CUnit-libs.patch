@@ -1,0 +1,44 @@
+--- ./Examples/AutomatedTest/Makefile.am~	2004-10-01 00:38:25.000000000 +0300
++++ ./Examples/AutomatedTest/Makefile.am	2005-11-29 23:56:29.000000000 +0200
+@@ -3,7 +3,7 @@
+ example_PROGRAMS = AutomatedTest
+ 
+ AutomatedTest_SOURCES = AutomatedTest.c AutomatedTest.h 
+-AutomatedTest_LDADD = -lcunit -lcunitexamples
++AutomatedTest_LDADD = -lcunit -lcunitexamples -lm
+ AutomatedTest_LDFLAGS = -L..
+ INCLUDES = -I..
+ 
+--- ./Examples/BasicTest/Makefile.am~	2004-10-01 00:38:25.000000000 +0300
++++ ./Examples/BasicTest/Makefile.am	2005-11-29 23:59:50.000000000 +0200
+@@ -3,7 +3,7 @@
+ example_PROGRAMS = BasicTest
+ 
+ BasicTest_SOURCES = BasicTest.c BasicTest.h
+-BasicTest_LDADD = -lcunit -lcunitexamples
++BasicTest_LDADD = -lcunit -lcunitexamples -lm
+ BasicTest_LDFLAGS = -L..
+ INCLUDES = -I..
+ 
+--- ./Examples/ConsoleTest/Makefile.am~	2004-10-01 00:38:25.000000000 +0300
++++ ./Examples/ConsoleTest/Makefile.am	2005-11-30 00:00:33.000000000 +0200
+@@ -3,7 +3,7 @@
+ example_PROGRAMS = ConsoleTest
+ 
+ ConsoleTest_SOURCES = ConsoleTest.c ConsoleTest.h
+-ConsoleTest_LDADD = -lcunit -lcunitexamples
++ConsoleTest_LDADD = -lcunit -lcunitexamples -lm
+ ConsoleTest_LDFLAGS = -L..
+ INCLUDES = -I..
+ 
+--- ./Examples/CursesTest/Makefile.am~	2004-10-01 00:38:25.000000000 +0300
++++ ./Examples/CursesTest/Makefile.am	2005-11-30 00:01:27.000000000 +0200
+@@ -3,7 +3,7 @@
+ example_PROGRAMS = CursesTest
+ 
+ CursesTest_SOURCES = CursesTest.c CursesTest.h
+-CursesTest_LDADD = -lcunit -lcunitexamples -lncurses
++CursesTest_LDADD = -lcunit -lcunitexamples -lncurses -lm
+ CursesTest_LDFLAGS = -L..
+ INCLUDES = -I..
+ 

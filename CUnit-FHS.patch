@@ -1,0 +1,56 @@
+--- ./doc/Makefile.am~	2004-10-01 00:38:27.000000000 +0300
++++ ./doc/Makefile.am	2005-11-30 00:06:17.000000000 +0200
+@@ -1,4 +1,4 @@
+-docdir = $(prefix)/doc/@PACKAGE@
++docdir = $(datadir)/doc/@PACKAGE@-@VERSION@/html
+ 
+ doc_DATA = \
+ 	CUnit_doc.css \
+--- ./doc/headers/Makefile.am~	2005-04-28 00:56:16.000000000 +0300
++++ ./doc/headers/Makefile.am	2005-11-30 00:10:47.000000000 +0200
+@@ -1,4 +1,4 @@
+-dochdrdir = $(prefix)/doc/@PACKAGE@/headers
++dochdrdir = $(datadir)/doc/@PACKAGE@-@VERSION@/headers
+ 
+ INCLUDE_FILES = \
+ 	Automated.h \
+--- ./Examples/AutomatedTest/Makefile.am~	2005-11-30 00:15:58.000000000 +0200
++++ ./Examples/AutomatedTest/Makefile.am	2005-11-30 00:19:16.000000000 +0200
+@@ -1,4 +1,4 @@
+-exampledir=${datadir}/@PACKAGE@/Examples/Automated
++exampledir=$(libdir)/@PACKAGE@/Examples/Automated
+ 
+ example_PROGRAMS = AutomatedTest
+ 
+--- ./Examples/BasicTest/Makefile.am~	2005-11-30 00:15:58.000000000 +0200
++++ ./Examples/BasicTest/Makefile.am	2005-11-30 00:20:07.000000000 +0200
+@@ -1,4 +1,4 @@
+-exampledir=${datadir}/@PACKAGE@/Examples/Basic
++exampledir=$(libdir)/@PACKAGE@/Examples/Basic
+ 
+ example_PROGRAMS = BasicTest
+ 
+--- ./Examples/ConsoleTest/Makefile.am~	2005-11-30 00:15:58.000000000 +0200
++++ ./Examples/ConsoleTest/Makefile.am	2005-11-30 00:20:17.000000000 +0200
+@@ -1,4 +1,4 @@
+-exampledir=${datadir}/@PACKAGE@/Examples/Console
++exampledir=$(libdir)/@PACKAGE@/Examples/Console
+ 
+ example_PROGRAMS = ConsoleTest
+ 
+--- ./Examples/CursesTest/Makefile.am~	2005-11-30 00:15:58.000000000 +0200
++++ ./Examples/CursesTest/Makefile.am	2005-11-30 00:20:27.000000000 +0200
+@@ -1,4 +1,4 @@
+-exampledir=${datadir}/@PACKAGE@/Examples/Curses
++exampledir=$(libdir)/@PACKAGE@/Examples/Curses
+ 
+ example_PROGRAMS = CursesTest
+ 
+--- ./CUnit/Sources/Test/Makefile.am~	2004-10-01 00:38:10.000000000 +0300
++++ ./CUnit/Sources/Test/Makefile.am	2005-11-30 00:25:09.000000000 +0200
+@@ -1,4 +1,4 @@
+-testdir=${datadir}/@PACKAGE@/Test
++testdir=$(libdir)/@PACKAGE@/Test
+ 
+ test_PROGRAMS = test_cunit
+ test_cunit_SOURCES = test_cunit.c

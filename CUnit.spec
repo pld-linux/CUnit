@@ -1,5 +1,5 @@
 Summary:	Automated testing framework for C
-Summary(pl.UTF-8):   Szkielet automatycznych testów dla C
+Summary(pl.UTF-8):	Szkielet automatycznych testów dla C
 Name:		CUnit
 Version:	2.0
 Release:	0.5

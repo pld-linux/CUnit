@@ -1,5 +1,5 @@
 Summary:	Automated testing framework for C
-Summary(pl):	Szkielet automatycznych testów dla C
+Summary(pl.UTF-8):   Szkielet automatycznych testÃ³w dla C
 Name:		CUnit
 Version:	2.0
 Release:	0.5
@@ -27,16 +27,16 @@ and provides a rich set of assertions for testing common data types.
 In addition, several different interfaces are provided for running
 tests and reporting results.
 
-%description -l pl
+%description -l pl.UTF-8
 CUnit to lekki system do pisania, administrowania i uruchamiania
-testów jednostkowych w C. Udostêpnia programistom C podstawow±
-funkcjonalno¶æ testuj±c± z elastycznym wyborem interfejsów
-u¿ytkownika.
+testÃ³w jednostkowych w C. UdostÄ™pnia programistom C podstawowÄ…
+funkcjonalnoÅ›Ä‡ testujÄ…cÄ… z elastycznym wyborem interfejsÃ³w
+uÅ¼ytkownika.
 
-CUnit jest budowany jako biblioteka statyczna, któr± linkuje siê z
-kodem testowym u¿ytkownika. U¿ywa prostego szkieletu do tworzenia
-struktur testowych i udostêpnia bogaty zbiór zapewnieñ (assertions)
-do testowania popularnych typów danych.
+CUnit jest budowany jako biblioteka statyczna, ktÃ³rÄ… linkuje siÄ™ z
+kodem testowym uÅ¼ytkownika. UÅ¼ywa prostego szkieletu do tworzenia
+struktur testowych i udostÄ™pnia bogaty zbiÃ³r zapewnieÅ„ (assertions)
+do testowania popularnych typÃ³w danych.
 
 %prep
 %setup -q -n %{name}-%{version}-2

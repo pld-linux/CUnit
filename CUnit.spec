@@ -1,19 +1,26 @@
+# NOTE: due to its nature, base package is development tool, so there is no separate -devel
+#
+# Conditional build:
+%bcond_with	examples	# build examples (seems broken)
+#
 Summary:	Automated testing framework for C
 Summary(pl.UTF-8):	Szkielet automatycznych testów dla C
 Name:		CUnit
-Version:	2.0
-Release:	0.5
-License:	LGPL
+Version:	2.1
+Release:	1
+License:	LGPL v2+
 Group:		Development/Tools
-Source0:	http://dl.sourceforge.net/cunit/%{name}-%{version}-2.tar.gz
-# Source0-md5:	d493ba42f06bf9156225f5026ff65f86
+Source0:	http://downloads.sourceforge.net/cunit/%{name}-%{version}-2-src.tar.bz2
+# Source0-md5:	31c62bd7a65007737ba28b7aafc44d3a
 Patch0:		%{name}-curses.patch
 Patch1:		%{name}-libs.patch
 Patch2:		%{name}-FHS.patch
 URL:		http://cunit.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	libtool
 BuildRequires:	ncurses-devel
+Requires:	%{name}-libs = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -38,6 +45,41 @@ kodem testowym użytkownika. Używa prostego szkieletu do tworzenia
 struktur testowych i udostępnia bogaty zbiór zapewnień (assertions)
 do testowania popularnych typów danych.
 
+%package libs
+Summary:	Shared CUnit library
+Summary(pl.UTF-8):	Biblioteka współdzielona CUnit
+Group:		Libraries
+
+%description libs
+Shared CUnit library.
+
+%description libs -l pl.UTF-8
+Biblioteka współdzielona CUnit.
+
+%package static
+Summary:	Static CUnit library
+Summary(pl.UTF-8):	Biblioteka statyczna CUnit
+Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description static
+Static CUnit library.
+
+%description static -l pl.UTF-8
+Biblioteka statyczna CUnit.
+
+%package examples
+Summary:	CUnit examples
+Summary(pl.UTF-8):	Przykłady do CUnita
+Group:		Development/Tools
+Requires:	%{name} = %{version}-%{release}
+
+%description examples
+CUnit examples.
+
+%description examples -l pl.UTF-8
+Przykłady do CUnita.
+
 %prep
 %setup -q -n %{name}-%{version}-2
 %patch0 -p1
@@ -45,13 +87,15 @@ do testowania popularnych typów danych.
 %patch2 -p1
 
 %build
+%{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__autoheader}
 %{__automake}
 %configure \
+	--enable-curses \
 	%{?debug:--enable-debug} \
-	--enable-curses
+	%{?with_examples:--enable-examples --enable-test}
 %{__make}
 
 %install
@@ -60,45 +104,51 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -rf html headers
-# can't package %doc %{_docdir}/%{name}-%{version} as rpm fails:
-# error: magic_file(ms, "/home/builder/tmp/cunit-2.0-root-builder/usr/share/doc/cunit-2.0/headers")
-# failed: mode 040755 cannot open `/home/builder/tmp/cunit-2.0-root-builder/usr/share/doc/cunit-2.0/headers' (No such file or directory)
-# rpmbuild: rpmfc.c:1564: rpmfcClassify: Assertion `ftype != ((void *)0)' failed.
-mv -f $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}/{html,headers} .
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libcunit.la
+
+rm -rf docs
+%{__mv} $RPM_BUILD_ROOT%{_docdir}/CUnit docs
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post	libs -p /sbin/ldconfig
+%postun	libs -p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README TODO
-%doc html headers
+%doc AUTHORS ChangeLog NEWS README TODO docs
+%attr(755,root,root) %{_libdir}/libcunit.so
 %{_includedir}/CUnit
-# maybe attempt to make .so too?
-%{_libdir}/libcunit.a
 %{_datadir}/CUnit
+%{_pkgconfigdir}/cunit.pc
+%{_mandir}/man3/CUnit.3*
 
-# dunno, worth to package these at all?
+%files libs
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libcunit.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libcunit.so.1
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/libcunit.a
+
+%if %{with examples}
+%files examples
 %dir %{_libdir}/CUnit
 %dir %{_libdir}/CUnit/Examples
 %dir %{_libdir}/CUnit/Examples/Automated
 %attr(755,root,root) %{_libdir}/CUnit/Examples/Automated/AutomatedTest
 %{_libdir}/CUnit/Examples/Automated/README
-
 %dir %{_libdir}/CUnit/Examples/Basic
 %attr(755,root,root) %{_libdir}/CUnit/Examples/Basic/BasicTest
 %{_libdir}/CUnit/Examples/Basic/README
-
 %dir %{_libdir}/CUnit/Examples/Console
 %attr(755,root,root) %{_libdir}/CUnit/Examples/Console/ConsoleTest
 %{_libdir}/CUnit/Examples/Console/README
-
 %dir %{_libdir}/CUnit/Examples/Curses
 %attr(755,root,root) %{_libdir}/CUnit/Examples/Curses/CursesTest
 %{_libdir}/CUnit/Examples/Curses/README
-
 %dir %{_libdir}/CUnit/Test
 %attr(755,root,root) %{_libdir}/CUnit/Test/test_cunit
-
-%{_mandir}/man3/CUnit.3*
+%endif

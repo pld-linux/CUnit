@@ -1,56 +1,74 @@
---- ./doc/Makefile.am~	2004-10-01 00:38:27.000000000 +0300
-+++ ./doc/Makefile.am	2005-11-30 00:06:17.000000000 +0200
-@@ -1,4 +1,4 @@
--docdir = $(prefix)/doc/@PACKAGE@
-+docdir = $(datadir)/doc/@PACKAGE@-@VERSION@/html
+--- CUnit-2.1-2/doc/headers/Makefile.am.orig	2010-10-14 11:22:01.000000000 +0200
++++ CUnit-2.1-2/doc/headers/Makefile.am	2013-10-15 20:29:25.894114411 +0200
+@@ -1,6 +1,6 @@
+ ## Process this file with automake to produce Makefile.in
  
- doc_DATA = \
- 	CUnit_doc.css \
---- ./doc/headers/Makefile.am~	2005-04-28 00:56:16.000000000 +0300
-+++ ./doc/headers/Makefile.am	2005-11-30 00:10:47.000000000 +0200
-@@ -1,4 +1,4 @@
 -dochdrdir = $(prefix)/doc/@PACKAGE@/headers
-+dochdrdir = $(datadir)/doc/@PACKAGE@-@VERSION@/headers
++dochdrdir = $(datarootdir)/doc/@PACKAGE@/headers
  
  INCLUDE_FILES = \
  	Automated.h \
---- ./Examples/AutomatedTest/Makefile.am~	2005-11-30 00:15:58.000000000 +0200
-+++ ./Examples/AutomatedTest/Makefile.am	2005-11-30 00:19:16.000000000 +0200
-@@ -1,4 +1,4 @@
+--- CUnit-2.1-2/doc/Makefile.am.orig	2006-03-21 02:30:57.000000000 +0100
++++ CUnit-2.1-2/doc/Makefile.am	2013-10-15 20:29:02.207448739 +0200
+@@ -1,8 +1,8 @@
+ ## Process this file with automake to produce Makefile.in
+ 
+-docdir = $(prefix)/doc/@PACKAGE@
++pkgdocdir = $(datarootdir)/doc/@PACKAGE@
+ 
+-doc_DATA = \
++pkgdoc_DATA = \
+ 	CUnit_doc.css \
+ 	error_handling.html \
+ 	fdl.html \
+--- CUnit-2.1-2/Examples/AutomatedTest/Makefile.am.orig	2013-10-15 20:25:15.024124939 +0200
++++ CUnit-2.1-2/Examples/AutomatedTest/Makefile.am	2013-10-15 20:33:42.807436964 +0200
+@@ -1,6 +1,6 @@
+ ## Process this file with automake to produce Makefile.in
+ 
 -exampledir=${datadir}/@PACKAGE@/Examples/Automated
-+exampledir=$(libdir)/@PACKAGE@/Examples/Automated
++exampledir=$(pkglibdir)/Examples/Automated
  
- example_PROGRAMS = AutomatedTest
+ if ENABLE_EXAMPLES
+ if ENABLE_AUTOMATED
+--- CUnit-2.1-2/Examples/BasicTest/Makefile.am.orig	2013-10-15 20:25:15.027458272 +0200
++++ CUnit-2.1-2/Examples/BasicTest/Makefile.am	2013-10-15 20:34:01.270769520 +0200
+@@ -1,6 +1,6 @@
+ ## Process this file with automake to produce Makefile.in
  
---- ./Examples/BasicTest/Makefile.am~	2005-11-30 00:15:58.000000000 +0200
-+++ ./Examples/BasicTest/Makefile.am	2005-11-30 00:20:07.000000000 +0200
-@@ -1,4 +1,4 @@
 -exampledir=${datadir}/@PACKAGE@/Examples/Basic
-+exampledir=$(libdir)/@PACKAGE@/Examples/Basic
++exampledir=$(pkglibdir)/Examples/Basic
  
- example_PROGRAMS = BasicTest
+ if ENABLE_EXAMPLES
+ if ENABLE_BASIC
+--- CUnit-2.1-2/Examples/ConsoleTest/Makefile.am.orig	2013-10-15 20:25:15.027458272 +0200
++++ CUnit-2.1-2/Examples/ConsoleTest/Makefile.am	2013-10-15 20:34:19.040768775 +0200
+@@ -1,6 +1,6 @@
+ ## Process this file with automake to produce Makefile.in
  
---- ./Examples/ConsoleTest/Makefile.am~	2005-11-30 00:15:58.000000000 +0200
-+++ ./Examples/ConsoleTest/Makefile.am	2005-11-30 00:20:17.000000000 +0200
-@@ -1,4 +1,4 @@
 -exampledir=${datadir}/@PACKAGE@/Examples/Console
-+exampledir=$(libdir)/@PACKAGE@/Examples/Console
++exampledir=$(pkglibdir)/Examples/Console
  
- example_PROGRAMS = ConsoleTest
+ if ENABLE_EXAMPLES
+ if ENABLE_CONSOLE
+--- CUnit-2.1-2/Examples/CursesTest/Makefile.am.orig	2013-10-15 20:25:15.027458272 +0200
++++ CUnit-2.1-2/Examples/CursesTest/Makefile.am	2013-10-15 20:34:37.674101327 +0200
+@@ -1,6 +1,6 @@
+ ## Process this file with automake to produce Makefile.in
  
---- ./Examples/CursesTest/Makefile.am~	2005-11-30 00:15:58.000000000 +0200
-+++ ./Examples/CursesTest/Makefile.am	2005-11-30 00:20:27.000000000 +0200
-@@ -1,4 +1,4 @@
 -exampledir=${datadir}/@PACKAGE@/Examples/Curses
-+exampledir=$(libdir)/@PACKAGE@/Examples/Curses
++exampledir=$(pkglibdir)/Examples/Curses
  
- example_PROGRAMS = CursesTest
+ if ENABLE_EXAMPLES
+ if ENABLE_CURSES
+--- CUnit-2.1-2/CUnit/Sources/Test/Makefile.am.orig	2013-10-15 20:41:40.950750230 +0200
++++ CUnit-2.1-2/CUnit/Sources/Test/Makefile.am	2013-10-15 20:42:06.947415805 +0200
+@@ -1,7 +1,7 @@
+ ## Process this file with automake to produce Makefile.in
  
---- ./CUnit/Sources/Test/Makefile.am~	2004-10-01 00:38:10.000000000 +0300
-+++ ./CUnit/Sources/Test/Makefile.am	2005-11-30 00:25:09.000000000 +0200
-@@ -1,4 +1,4 @@
+ if ENABLE_TEST
 -testdir=${datadir}/@PACKAGE@/Test
-+testdir=$(libdir)/@PACKAGE@/Test
++testdir=$(pkglibdir)/Test
  
  test_PROGRAMS = test_cunit
  test_cunit_SOURCES = test_cunit.c

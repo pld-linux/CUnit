@@ -1,44 +1,76 @@
---- ./Examples/AutomatedTest/Makefile.am~	2004-10-01 00:38:25.000000000 +0300
-+++ ./Examples/AutomatedTest/Makefile.am	2005-11-29 23:56:29.000000000 +0200
-@@ -3,7 +3,7 @@
+--- CUnit-2.1-2/Examples/AutomatedTest/Makefile.am.orig	2010-10-14 10:43:09.000000000 +0200
++++ CUnit-2.1-2/Examples/AutomatedTest/Makefile.am	2013-10-15 20:21:48.537466937 +0200
+@@ -8,8 +8,8 @@ if ENABLE_AUTOMATED
  example_PROGRAMS = AutomatedTest
  
- AutomatedTest_SOURCES = AutomatedTest.c AutomatedTest.h 
+ AutomatedTest_SOURCES = AutomatedTest.c
 -AutomatedTest_LDADD = -lcunit -lcunitexamples
-+AutomatedTest_LDADD = -lcunit -lcunitexamples -lm
- AutomatedTest_LDFLAGS = -L..
+-AutomatedTest_LDFLAGS = -L.. -lm
++AutomatedTest_LDADD = $(top_builddir)/CUnit/Sources/libcunit.la $(top_builddir)/Examples/libcunitexamples.a
++AutomatedTest_LDFLAGS = -lm
  INCLUDES = -I..
  
---- ./Examples/BasicTest/Makefile.am~	2004-10-01 00:38:25.000000000 +0300
-+++ ./Examples/BasicTest/Makefile.am	2005-11-29 23:59:50.000000000 +0200
-@@ -3,7 +3,7 @@
+ if ENABLE_CURSES
+--- CUnit-2.1-2/Examples/BasicTest/Makefile.am.orig	2010-10-14 10:39:59.000000000 +0200
++++ CUnit-2.1-2/Examples/BasicTest/Makefile.am	2013-10-15 20:22:26.284132020 +0200
+@@ -8,8 +8,8 @@ if ENABLE_BASIC
  example_PROGRAMS = BasicTest
  
- BasicTest_SOURCES = BasicTest.c BasicTest.h
+ BasicTest_SOURCES = BasicTest.c
 -BasicTest_LDADD = -lcunit -lcunitexamples
-+BasicTest_LDADD = -lcunit -lcunitexamples -lm
- BasicTest_LDFLAGS = -L..
+-BasicTest_LDFLAGS = -L.. -lm
++BasicTest_LDADD = $(top_builddir)/CUnit/Sources/libcunit.la $(top_builddir)/Examples/libcunitexamples.a
++BasicTest_LDFLAGS = -lm
  INCLUDES = -I..
  
---- ./Examples/ConsoleTest/Makefile.am~	2004-10-01 00:38:25.000000000 +0300
-+++ ./Examples/ConsoleTest/Makefile.am	2005-11-30 00:00:33.000000000 +0200
-@@ -3,7 +3,7 @@
+ if ENABLE_CURSES
+--- CUnit-2.1-2/Examples/ConsoleTest/Makefile.am.orig	2010-10-14 10:42:08.000000000 +0200
++++ CUnit-2.1-2/Examples/ConsoleTest/Makefile.am	2013-10-15 20:23:13.677463364 +0200
+@@ -8,8 +8,8 @@ if ENABLE_CONSOLE
  example_PROGRAMS = ConsoleTest
  
- ConsoleTest_SOURCES = ConsoleTest.c ConsoleTest.h
+ ConsoleTest_SOURCES = ConsoleTest.c
 -ConsoleTest_LDADD = -lcunit -lcunitexamples
-+ConsoleTest_LDADD = -lcunit -lcunitexamples -lm
- ConsoleTest_LDFLAGS = -L..
+-ConsoleTest_LDFLAGS = -L.. -lm
++ConsoleTest_LDADD = $(top_builddir)/CUnit/Sources/libcunit.la $(top_builddir)/Examples/libcunitexamples.a
++ConsoleTest_LDFLAGS = -lm
  INCLUDES = -I..
  
---- ./Examples/CursesTest/Makefile.am~	2004-10-01 00:38:25.000000000 +0300
-+++ ./Examples/CursesTest/Makefile.am	2005-11-30 00:01:27.000000000 +0200
-@@ -3,7 +3,7 @@
+ if ENABLE_CURSES
+--- CUnit-2.1-2/Examples/CursesTest/Makefile.am.orig	2010-10-14 10:42:37.000000000 +0200
++++ CUnit-2.1-2/Examples/CursesTest/Makefile.am	2013-10-15 20:23:46.394128658 +0200
+@@ -8,8 +8,8 @@ if ENABLE_CURSES
  example_PROGRAMS = CursesTest
  
- CursesTest_SOURCES = CursesTest.c CursesTest.h
--CursesTest_LDADD = -lcunit -lcunitexamples -lncurses
-+CursesTest_LDADD = -lcunit -lcunitexamples -lncurses -lm
- CursesTest_LDFLAGS = -L..
+ CursesTest_SOURCES = CursesTest.c
+-CursesTest_LDADD = -lcunit -lcunitexamples
+-CursesTest_LDFLAGS = -L.. -lm
++CursesTest_LDADD = $(top_builddir)/CUnit/Sources/libcunit.la $(top_builddir)/Examples/libcunitexamples.a
++CursesTest_LDFLAGS = -lm
  INCLUDES = -I..
  
+ if ENABLE_CURSES
+--- CUnit-2.1-2/CUnit/Sources/Test/Makefile.am.orig	2006-03-21 02:30:54.000000000 +0100
++++ CUnit-2.1-2/CUnit/Sources/Test/Makefile.am	2013-10-15 20:41:40.950750230 +0200
+@@ -5,8 +5,7 @@
+ 
+ test_PROGRAMS = test_cunit
+ test_cunit_SOURCES = test_cunit.c
+-test_cunit_LDADD = ../libcunit_test.a
+-test_cunit_LDFLAGS = -L..
++test_cunit_LDADD = $(top_builddir)/CUnit/Sources/libcunit_test.a
+ 
+ INCLUDES = -I../../Headers -DMEMTRACE -DCUNIT_BUILD_TESTS -DCUNIT_DO_NOT_DEFINE_UNLESS_BUILDING_TESTS
+ endif
+--- CUnit-2.1-2/CUnit/Sources/Makefile.am.orig	2006-03-21 02:30:53.000000000 +0100
++++ CUnit-2.1-2/CUnit/Sources/Makefile.am	2013-10-16 16:20:48.227781246 +0200
+@@ -69,6 +69,9 @@
+ libcunit_la_LIBADD = $(OBJECT_FILES_SHARED)
+ libcunit_la_LDFLAGS = -version-info @LIBTOOL_CURRENT@:@LIBTOOL_REVISION@:@LIBTOOL_AGE@
+ 
++if ENABLE_CURSES
++libcunit_la_LIBADD += -l$(CURSES_LIB)
++endif
+ 
+ if ENABLE_TEST
+ noinst_LIBRARIES = libcunit_test.a

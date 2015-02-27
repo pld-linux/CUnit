@@ -7,7 +7,7 @@ Summary:	Automated testing framework for C
 Summary(pl.UTF-8):	Szkielet automatycznych testów dla C
 Name:		CUnit
 Version:	2.1
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Development/Tools
 Source0:	http://downloads.sourceforge.net/cunit/%{name}-%{version}-2-src.tar.bz2

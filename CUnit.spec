@@ -7,11 +7,11 @@ Summary:	Automated testing framework for C
 Summary(pl.UTF-8):	Szkielet automatycznych testów dla C
 Name:		CUnit
 Version:	2.1
-Release:	2
+Release:	3
 License:	LGPL v2+
 Group:		Development/Tools
-Source0:	http://downloads.sourceforge.net/cunit/%{name}-%{version}-2-src.tar.bz2
-# Source0-md5:	31c62bd7a65007737ba28b7aafc44d3a
+Source0:	http://downloads.sourceforge.net/cunit/%{name}-%{version}-3.tar.bz2
+# Source0-md5:	b5f1a9f6093869c070c6e4a9450cc10c
 Patch0:		%{name}-curses.patch
 Patch1:		%{name}-libs.patch
 Patch2:		%{name}-FHS.patch
@@ -81,7 +81,7 @@ CUnit examples.
 Przykłady do CUnita.
 
 %prep
-%setup -q -n %{name}-%{version}-2
+%setup -q -n %{name}-%{version}-3
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -135,20 +135,20 @@ rm -rf $RPM_BUILD_ROOT
 
 %if %{with examples}
 %files examples
-%dir %{_libdir}/CUnit
-%dir %{_libdir}/CUnit/Examples
-%dir %{_libdir}/CUnit/Examples/Automated
-%attr(755,root,root) %{_libdir}/CUnit/Examples/Automated/AutomatedTest
-%{_libdir}/CUnit/Examples/Automated/README
-%dir %{_libdir}/CUnit/Examples/Basic
-%attr(755,root,root) %{_libdir}/CUnit/Examples/Basic/BasicTest
-%{_libdir}/CUnit/Examples/Basic/README
-%dir %{_libdir}/CUnit/Examples/Console
-%attr(755,root,root) %{_libdir}/CUnit/Examples/Console/ConsoleTest
-%{_libdir}/CUnit/Examples/Console/README
-%dir %{_libdir}/CUnit/Examples/Curses
-%attr(755,root,root) %{_libdir}/CUnit/Examples/Curses/CursesTest
-%{_libdir}/CUnit/Examples/Curses/README
-%dir %{_libdir}/CUnit/Test
-%attr(755,root,root) %{_libdir}/CUnit/Test/test_cunit
+%dir %{_libexecdir}/CUnit
+%dir %{_libexecdir}/CUnit/Examples
+%dir %{_libexecdir}/CUnit/Examples/Automated
+%attr(755,root,root) %{_libexecdir}/CUnit/Examples/Automated/AutomatedTest
+%{_libexecdir}/CUnit/Examples/Automated/README
+%dir %{_libexecdir}/CUnit/Examples/Basic
+%attr(755,root,root) %{_libexecdir}/CUnit/Examples/Basic/BasicTest
+%{_libexecdir}/CUnit/Examples/Basic/README
+%dir %{_libexecdir}/CUnit/Examples/Console
+%attr(755,root,root) %{_libexecdir}/CUnit/Examples/Console/ConsoleTest
+%{_libexecdir}/CUnit/Examples/Console/README
+%dir %{_libexecdir}/CUnit/Examples/Curses
+%attr(755,root,root) %{_libexecdir}/CUnit/Examples/Curses/CursesTest
+%{_libexecdir}/CUnit/Examples/Curses/README
+%dir %{_libexecdir}/CUnit/Test
+%attr(755,root,root) %{_libexecdir}/CUnit/Test/test_cunit
 %endif

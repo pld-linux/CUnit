@@ -1,15 +1,62 @@
---- CUnit-2.1-2/doc/headers/Makefile.am.orig	2010-10-14 11:22:01.000000000 +0200
-+++ CUnit-2.1-2/doc/headers/Makefile.am	2013-10-15 20:29:25.894114411 +0200
+diff -urNp -x '*.orig' CUnit-2.1-3.org/CUnit/Sources/Test/Makefile.am CUnit-2.1-3/CUnit/Sources/Test/Makefile.am
+--- CUnit-2.1-3.org/CUnit/Sources/Test/Makefile.am	2023-07-23 15:06:33.863438862 +0200
++++ CUnit-2.1-3/CUnit/Sources/Test/Makefile.am	2023-07-23 15:06:33.980440529 +0200
+@@ -2,7 +2,7 @@
+ 
+ if ENABLE_TEST
+ AM_CPPFLAGS = -I$(top_srcdir)/CUnit/Headers
+-testdir=${datadir}/@PACKAGE@/Test
++testdir=$(pkglibexecdir)/Test
+ 
+ test_PROGRAMS = test_cunit
+ test_cunit_SOURCES = test_cunit.c
+diff -urNp -x '*.orig' CUnit-2.1-3.org/Examples/AutomatedTest/Makefile.am CUnit-2.1-3/Examples/AutomatedTest/Makefile.am
+--- CUnit-2.1-3.org/Examples/AutomatedTest/Makefile.am	2023-07-23 15:06:33.862438848 +0200
++++ CUnit-2.1-3/Examples/AutomatedTest/Makefile.am	2023-07-23 15:06:33.979440515 +0200
 @@ -1,6 +1,6 @@
  ## Process this file with automake to produce Makefile.in
  
--dochdrdir = $(prefix)/doc/@PACKAGE@/headers
-+dochdrdir = $(datarootdir)/doc/@PACKAGE@/headers
+-exampledir=${datadir}/@PACKAGE@/Examples/Automated
++exampledir=$(pkglibexecdir)/Examples/Automated
  
- INCLUDE_FILES = \
- 	Automated.h \
---- CUnit-2.1-2/doc/Makefile.am.orig	2006-03-21 02:30:57.000000000 +0100
-+++ CUnit-2.1-2/doc/Makefile.am	2013-10-15 20:29:02.207448739 +0200
+ if ENABLE_EXAMPLES
+ if ENABLE_AUTOMATED
+diff -urNp -x '*.orig' CUnit-2.1-3.org/Examples/BasicTest/Makefile.am CUnit-2.1-3/Examples/BasicTest/Makefile.am
+--- CUnit-2.1-3.org/Examples/BasicTest/Makefile.am	2023-07-23 15:06:33.863438862 +0200
++++ CUnit-2.1-3/Examples/BasicTest/Makefile.am	2023-07-23 15:06:33.979440515 +0200
+@@ -1,6 +1,6 @@
+ ## Process this file with automake to produce Makefile.in
+ 
+-exampledir=${datadir}/@PACKAGE@/Examples/Basic
++exampledir=$(pkglibexecdir)/Examples/Basic
+ 
+ if ENABLE_EXAMPLES
+ if ENABLE_BASIC
+diff -urNp -x '*.orig' CUnit-2.1-3.org/Examples/ConsoleTest/Makefile.am CUnit-2.1-3/Examples/ConsoleTest/Makefile.am
+--- CUnit-2.1-3.org/Examples/ConsoleTest/Makefile.am	2023-07-23 15:06:33.863438862 +0200
++++ CUnit-2.1-3/Examples/ConsoleTest/Makefile.am	2023-07-23 15:06:33.979440515 +0200
+@@ -1,6 +1,6 @@
+ ## Process this file with automake to produce Makefile.in
+ 
+-exampledir=${datadir}/@PACKAGE@/Examples/Console
++exampledir=$(pkglibexecdir)/Examples/Console
+ 
+ if ENABLE_EXAMPLES
+ if ENABLE_CONSOLE
+diff -urNp -x '*.orig' CUnit-2.1-3.org/Examples/CursesTest/Makefile.am CUnit-2.1-3/Examples/CursesTest/Makefile.am
+--- CUnit-2.1-3.org/Examples/CursesTest/Makefile.am	2023-07-23 15:06:33.863438862 +0200
++++ CUnit-2.1-3/Examples/CursesTest/Makefile.am	2023-07-23 15:06:33.980440529 +0200
+@@ -1,6 +1,6 @@
+ ## Process this file with automake to produce Makefile.in
+ 
+-exampledir=${datadir}/@PACKAGE@/Examples/Curses
++exampledir=$(pkglibexecdir)/Examples/Curses
+ 
+ if ENABLE_EXAMPLES
+ if ENABLE_CURSES
+diff -urNp -x '*.orig' CUnit-2.1-3.org/doc/Makefile.am CUnit-2.1-3/doc/Makefile.am
+--- CUnit-2.1-3.org/doc/Makefile.am	2014-04-24 02:54:45.000000000 +0200
++++ CUnit-2.1-3/doc/Makefile.am	2023-07-23 15:06:33.979440515 +0200
 @@ -1,8 +1,8 @@
  ## Process this file with automake to produce Makefile.in
  
@@ -21,54 +68,14 @@
  	CUnit_doc.css \
  	error_handling.html \
  	fdl.html \
---- CUnit-2.1-2/Examples/AutomatedTest/Makefile.am.orig	2013-10-15 20:25:15.024124939 +0200
-+++ CUnit-2.1-2/Examples/AutomatedTest/Makefile.am	2013-10-15 20:33:42.807436964 +0200
+diff -urNp -x '*.orig' CUnit-2.1-3.org/doc/headers/Makefile.am CUnit-2.1-3/doc/headers/Makefile.am
+--- CUnit-2.1-3.org/doc/headers/Makefile.am	2014-04-24 02:54:45.000000000 +0200
++++ CUnit-2.1-3/doc/headers/Makefile.am	2023-07-23 15:06:33.979440515 +0200
 @@ -1,6 +1,6 @@
  ## Process this file with automake to produce Makefile.in
  
--exampledir=${datadir}/@PACKAGE@/Examples/Automated
-+exampledir=$(pkglibexecdir)/Examples/Automated
+-dochdrdir = $(prefix)/doc/@PACKAGE@/headers
++dochdrdir = $(datarootdir)/doc/@PACKAGE@/headers
  
- if ENABLE_EXAMPLES
- if ENABLE_AUTOMATED
---- CUnit-2.1-2/Examples/BasicTest/Makefile.am.orig	2013-10-15 20:25:15.027458272 +0200
-+++ CUnit-2.1-2/Examples/BasicTest/Makefile.am	2013-10-15 20:34:01.270769520 +0200
-@@ -1,6 +1,6 @@
- ## Process this file with automake to produce Makefile.in
- 
--exampledir=${datadir}/@PACKAGE@/Examples/Basic
-+exampledir=$(pkglibexecdir)/Examples/Basic
- 
- if ENABLE_EXAMPLES
- if ENABLE_BASIC
---- CUnit-2.1-2/Examples/ConsoleTest/Makefile.am.orig	2013-10-15 20:25:15.027458272 +0200
-+++ CUnit-2.1-2/Examples/ConsoleTest/Makefile.am	2013-10-15 20:34:19.040768775 +0200
-@@ -1,6 +1,6 @@
- ## Process this file with automake to produce Makefile.in
- 
--exampledir=${datadir}/@PACKAGE@/Examples/Console
-+exampledir=$(pkglibexecdir)/Examples/Console
- 
- if ENABLE_EXAMPLES
- if ENABLE_CONSOLE
---- CUnit-2.1-2/Examples/CursesTest/Makefile.am.orig	2013-10-15 20:25:15.027458272 +0200
-+++ CUnit-2.1-2/Examples/CursesTest/Makefile.am	2013-10-15 20:34:37.674101327 +0200
-@@ -1,6 +1,6 @@
- ## Process this file with automake to produce Makefile.in
- 
--exampledir=${datadir}/@PACKAGE@/Examples/Curses
-+exampledir=$(pkglibexecdir)/Examples/Curses
- 
- if ENABLE_EXAMPLES
- if ENABLE_CURSES
---- CUnit-2.1-3/CUnit/Sources/Test/Makefile.am.orig	2018-04-14 20:13:35.236957272 +0200
-+++ CUnit-2.1-3/CUnit/Sources/Test/Makefile.am	2018-04-14 20:16:47.150288418 +0200
-@@ -2,7 +2,7 @@
- 
- if ENABLE_TEST
- AM_CPPFLAGS = -I$(top_srcdir)/CUnit/Headers
--testdir=${datadir}/@PACKAGE@/Test
-+testdir=$(pkglibexecdir)/Test
- 
- test_PROGRAMS = test_cunit
- test_cunit_SOURCES = test_cunit.c
+ INCLUDE_FILES = \
+ 	Automated.h \

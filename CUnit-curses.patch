@@ -1,5 +1,6 @@
---- CUnit-2.1-2/CUnit/Sources/Curses/Curses.c.orig	2013-10-15 19:17:17.997629368 +0200
-+++ CUnit-2.1-2/CUnit/Sources/Curses/Curses.c	2013-10-15 19:30:33.654262646 +0200
+diff -urNp -x '*.orig' CUnit-2.1-3.org/CUnit/Sources/Curses/Curses.c CUnit-2.1-3/CUnit/Sources/Curses/Curses.c
+--- CUnit-2.1-3.org/CUnit/Sources/Curses/Curses.c	2014-04-24 02:54:45.000000000 +0200
++++ CUnit-2.1-3/CUnit/Sources/Curses/Curses.c	2023-07-23 15:06:33.413432452 +0200
 @@ -51,7 +51,7 @@
  #include <ctype.h>
  #include <assert.h>

@@ -1,5 +1,32 @@
---- CUnit-2.1-2/Examples/AutomatedTest/Makefile.am.orig	2010-10-14 10:43:09.000000000 +0200
-+++ CUnit-2.1-2/Examples/AutomatedTest/Makefile.am	2013-10-15 20:21:48.537466937 +0200
+diff -urNp -x '*.orig' CUnit-2.1-3.org/CUnit/Sources/Makefile.am CUnit-2.1-3/CUnit/Sources/Makefile.am
+--- CUnit-2.1-3.org/CUnit/Sources/Makefile.am	2014-04-24 02:54:45.000000000 +0200
++++ CUnit-2.1-3/CUnit/Sources/Makefile.am	2023-07-23 15:06:33.699436526 +0200
+@@ -69,6 +69,9 @@ libcunit_la_SOURCES =
+ libcunit_la_LIBADD = $(OBJECT_FILES_SHARED)
+ libcunit_la_LDFLAGS = -version-info @LIBTOOL_CURRENT@:@LIBTOOL_REVISION@:@LIBTOOL_AGE@
+ 
++if ENABLE_CURSES
++libcunit_la_LIBADD += -l$(CURSES_LIB)
++endif
+ 
+ if ENABLE_TEST
+ noinst_LIBRARIES = libcunit_test.a
+diff -urNp -x '*.orig' CUnit-2.1-3.org/CUnit/Sources/Test/Makefile.am CUnit-2.1-3/CUnit/Sources/Test/Makefile.am
+--- CUnit-2.1-3.org/CUnit/Sources/Test/Makefile.am	2014-04-24 02:54:45.000000000 +0200
++++ CUnit-2.1-3/CUnit/Sources/Test/Makefile.am	2023-07-23 15:06:33.698436512 +0200
+@@ -6,8 +6,7 @@ testdir=${datadir}/@PACKAGE@/Test
+ 
+ test_PROGRAMS = test_cunit
+ test_cunit_SOURCES = test_cunit.c
+-test_cunit_LDADD = ../libcunit_test.a
+-test_cunit_LDFLAGS = -L..
++test_cunit_LDADD = $(top_builddir)/CUnit/Sources/libcunit_test.a
+ 
+ INCLUDES = -DMEMTRACE -DCUNIT_BUILD_TESTS -DCUNIT_DO_NOT_DEFINE_UNLESS_BUILDING_TESTS
+ endif
+diff -urNp -x '*.orig' CUnit-2.1-3.org/Examples/AutomatedTest/Makefile.am CUnit-2.1-3/Examples/AutomatedTest/Makefile.am
+--- CUnit-2.1-3.org/Examples/AutomatedTest/Makefile.am	2014-04-24 02:54:45.000000000 +0200
++++ CUnit-2.1-3/Examples/AutomatedTest/Makefile.am	2023-07-23 15:06:33.698436512 +0200
 @@ -8,8 +8,8 @@ if ENABLE_AUTOMATED
  example_PROGRAMS = AutomatedTest
  
@@ -11,8 +38,9 @@
  INCLUDES = -I..
  
  if ENABLE_CURSES
---- CUnit-2.1-2/Examples/BasicTest/Makefile.am.orig	2010-10-14 10:39:59.000000000 +0200
-+++ CUnit-2.1-2/Examples/BasicTest/Makefile.am	2013-10-15 20:22:26.284132020 +0200
+diff -urNp -x '*.orig' CUnit-2.1-3.org/Examples/BasicTest/Makefile.am CUnit-2.1-3/Examples/BasicTest/Makefile.am
+--- CUnit-2.1-3.org/Examples/BasicTest/Makefile.am	2014-04-24 02:54:45.000000000 +0200
++++ CUnit-2.1-3/Examples/BasicTest/Makefile.am	2023-07-23 15:06:33.698436512 +0200
 @@ -8,8 +8,8 @@ if ENABLE_BASIC
  example_PROGRAMS = BasicTest
  
@@ -24,8 +52,9 @@
  INCLUDES = -I..
  
  if ENABLE_CURSES
---- CUnit-2.1-2/Examples/ConsoleTest/Makefile.am.orig	2010-10-14 10:42:08.000000000 +0200
-+++ CUnit-2.1-2/Examples/ConsoleTest/Makefile.am	2013-10-15 20:23:13.677463364 +0200
+diff -urNp -x '*.orig' CUnit-2.1-3.org/Examples/ConsoleTest/Makefile.am CUnit-2.1-3/Examples/ConsoleTest/Makefile.am
+--- CUnit-2.1-3.org/Examples/ConsoleTest/Makefile.am	2014-04-24 02:54:45.000000000 +0200
++++ CUnit-2.1-3/Examples/ConsoleTest/Makefile.am	2023-07-23 15:06:33.698436512 +0200
 @@ -8,8 +8,8 @@ if ENABLE_CONSOLE
  example_PROGRAMS = ConsoleTest
  
@@ -37,8 +66,9 @@
  INCLUDES = -I..
  
  if ENABLE_CURSES
---- CUnit-2.1-2/Examples/CursesTest/Makefile.am.orig	2010-10-14 10:42:37.000000000 +0200
-+++ CUnit-2.1-2/Examples/CursesTest/Makefile.am	2013-10-15 20:23:46.394128658 +0200
+diff -urNp -x '*.orig' CUnit-2.1-3.org/Examples/CursesTest/Makefile.am CUnit-2.1-3/Examples/CursesTest/Makefile.am
+--- CUnit-2.1-3.org/Examples/CursesTest/Makefile.am	2014-04-24 02:54:45.000000000 +0200
++++ CUnit-2.1-3/Examples/CursesTest/Makefile.am	2023-07-23 15:06:33.698436512 +0200
 @@ -8,8 +8,8 @@ if ENABLE_CURSES
  example_PROGRAMS = CursesTest
  
@@ -50,27 +80,3 @@
  INCLUDES = -I..
  
  if ENABLE_CURSES
---- CUnit-2.1-2/CUnit/Sources/Test/Makefile.am.orig	2006-03-21 02:30:54.000000000 +0100
-+++ CUnit-2.1-2/CUnit/Sources/Test/Makefile.am	2013-10-15 20:41:40.950750230 +0200
-@@ -5,8 +5,7 @@
- 
- test_PROGRAMS = test_cunit
- test_cunit_SOURCES = test_cunit.c
--test_cunit_LDADD = ../libcunit_test.a
--test_cunit_LDFLAGS = -L..
-+test_cunit_LDADD = $(top_builddir)/CUnit/Sources/libcunit_test.a
- 
- INCLUDES = -I../../Headers -DMEMTRACE -DCUNIT_BUILD_TESTS -DCUNIT_DO_NOT_DEFINE_UNLESS_BUILDING_TESTS
- endif
---- CUnit-2.1-2/CUnit/Sources/Makefile.am.orig	2006-03-21 02:30:53.000000000 +0100
-+++ CUnit-2.1-2/CUnit/Sources/Makefile.am	2013-10-16 16:20:48.227781246 +0200
-@@ -69,6 +69,9 @@
- libcunit_la_LIBADD = $(OBJECT_FILES_SHARED)
- libcunit_la_LDFLAGS = -version-info @LIBTOOL_CURRENT@:@LIBTOOL_REVISION@:@LIBTOOL_AGE@
- 
-+if ENABLE_CURSES
-+libcunit_la_LIBADD += -l$(CURSES_LIB)
-+endif
- 
- if ENABLE_TEST
- noinst_LIBRARIES = libcunit_test.a

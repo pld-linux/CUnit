@@ -7,7 +7,7 @@ Summary:	Automated testing framework for C
 Summary(pl.UTF-8):	Szkielet automatycznych testów dla C
 Name:		CUnit
 Version:	2.1
-Release:	3
+Release:	4
 License:	LGPL v2+
 Group:		Development/Tools
 Source0:	http://downloads.sourceforge.net/cunit/%{name}-%{version}-3.tar.bz2
@@ -15,6 +15,7 @@ Source0:	http://downloads.sourceforge.net/cunit/%{name}-%{version}-3.tar.bz2
 Patch0:		%{name}-curses.patch
 Patch1:		%{name}-libs.patch
 Patch2:		%{name}-FHS.patch
+Patch3:		format.patch
 URL:		http://cunit.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -85,6 +86,7 @@ Przykłady do CUnita.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__libtoolize}

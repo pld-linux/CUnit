@@ -1,0 +1,43 @@
+diff -ur CUnit-2.1-3.orig/CUnit/Sources/Curses/Curses.c CUnit-2.1-3/CUnit/Sources/Curses/Curses.c
+--- CUnit-2.1-3.orig/CUnit/Sources/Curses/Curses.c	2014-04-24 02:54:45.000000000 +0200
++++ CUnit-2.1-3/CUnit/Sources/Curses/Curses.c	2023-07-23 21:37:18.730110415 +0200
+@@ -952,11 +952,11 @@
+ 
+   snprintf(szTemp, STRING_LENGTH,   _("Commands:  R - run all tests in suite %s"),
+                                     pSuite->pName);
+-  mvwprintw(details_pad.pPad, 0, 0, szTemp);
++  mvwprintw(details_pad.pPad, 0, 0, "%s", szTemp);
+   mvwprintw(details_pad.pPad, 1, 0, _("           S - Select and run a test"));
+   snprintf(szTemp, STRING_LENGTH,   _("           L - List all tests registered in suite %s"),
+                                     pSuite->pName);
+-  mvwprintw(details_pad.pPad, 2, 0, szTemp);
++  mvwprintw(details_pad.pPad, 2, 0, "%s", szTemp);
+   mvwprintw(details_pad.pPad, 3, 0, _("           A - Activate or deactivate a test (toggle)"));
+   mvwprintw(details_pad.pPad, 4, 0, _("           F - Show failures from last test run"));
+   mvwprintw(details_pad.pPad, 5, 0, _("           M - Move up to main menu"));
+@@ -1068,14 +1068,14 @@
+   }
+ 
+   snprintf(szTemp, STRING_LENGTH, "%s: %s", _("Suite"), pSuite->pName);
+-  mvwprintw(details_pad.pPad, 0, 0, szTemp);
++  mvwprintw(details_pad.pPad, 0, 0, "%s", szTemp);
+ 
+   snprintf(szTemp, STRING_LENGTH,
+            "%*s  %-*s%*s",
+            width[0], _("#"),
+            width[1], _("Test Name"),
+            width[2], _("Active?"));
+-  mvwprintw(details_pad.pPad, 1, 0, szTemp);
++  mvwprintw(details_pad.pPad, 1, 0, "%s", szTemp);
+ 
+   for (i = 0, pCurTest = pSuite->pTest ;
+        NULL != pCurTest ;
+@@ -1158,7 +1158,7 @@
+ 
+     snprintf(szTemp, STRING_LENGTH,   _("   1 - Inactive suites/tests treated as runtime failures     %s"),
+                                       (CU_FALSE != CU_get_fail_on_inactive()) ? _("Yes") : _("No "));
+-    mvwprintw(details_pad.pPad, 2, 0, szTemp);
++    mvwprintw(details_pad.pPad, 2, 0, "%s", szTemp);
+     refresh_details_window();
+     read_input_string(_("Enter number of option to change : "), szTemp, STRING_LENGTH);
+     option_num = atol(szTemp);
